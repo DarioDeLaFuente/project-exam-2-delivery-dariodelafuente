@@ -14,12 +14,12 @@ You can use a repo in your own Github account for the exam if you want to use Gi
 ```bash
 INFO: vite, DO NOT USE CREATE REACT APP
 - forms - react hook form + either yup or zod for validation
-- use this api - https://docs.noroff.dev/docs/v1 
+- use this api - https://docs.noroff.dev/docs/v1
 - use context api, redux toolkit, zustand
-- keep constants in a separate file or preferably .env 
+- keep constants in a separate file or preferably .env
 - do not ever use normal A elements for links. Always react router for navigation. A is only for external links.
 - always style the active menu item
-- no tests required, not Jest, no Cypress 
+- no tests required, not Jest, no Cypress
 
 3 options for API calls
 - all inside the components. Simplest but not the greatest.
