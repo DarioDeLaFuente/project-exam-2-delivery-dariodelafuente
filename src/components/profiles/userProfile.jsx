@@ -10,6 +10,9 @@ const UserProfile = ({ user }) => {
               <div className="col-md-4">
                 <img src={user.banner} alt="Banner" />
               </div>
+              <div className="col-md-4">
+                <img src={user.avatar} alt="Banner" />
+              </div>
               <div className="col-md-8">
                 <div className="card-body">
                   <h5 className="card-title">Card title</h5>
@@ -22,12 +25,12 @@ const UserProfile = ({ user }) => {
                   </p>
                   <p className="card-text">
                     <small className="text-muted">
-                      {user._count.followers}
+                      {user._count.followers}user follow u
                     </small>
                   </p>
                   <p className="card-text">
                     <small className="text-muted">
-                      {user._count.following}
+                      {user._count.following}user u follow
                     </small>
                   </p>
                 </div>

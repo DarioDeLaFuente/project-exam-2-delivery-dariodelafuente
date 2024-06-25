@@ -3,6 +3,18 @@ import axios from "axios";
 import { POSTS_URL } from "../../constants/apiUrl";
 import { getToken } from "../../utils/storage";
 import { Form, Button, Container } from "react-bootstrap";
+import { useMutation, useQueryClient } from "react-query";
+
+const createPost = async (postData) => {
+  const accessToken = getToken();
+  const response = await axios.post(POSTS_URL, postData, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
+  return response.data;
+};
 
 const CreatePostForm = () => {
   const [title, setTitle] = useState("");
@@ -11,12 +23,26 @@ const CreatePostForm = () => {
   const [media, setMedia] = useState("");
   const [error, setError] = useState(null);
 
-  const handleSubmit = async (e) => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(createPost, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("posts");
+      setTitle("");
+      setBody("");
+      setTags("");
+      setMedia("");
+    },
+    onError: (error) => {
+      setError(
+        "Failed to create post. Please check the media URL and try again.",
+      );
+    },
+  });
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     setError(null);
-
-    const accessToken = getToken();
-
     const postData = {
       title,
       body,
@@ -24,25 +50,7 @@ const CreatePostForm = () => {
       media,
     };
 
-    try {
-      const response = await axios.post(POSTS_URL, postData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      console.log("Post created:", response.data);
-      setTitle("");
-      setBody("");
-      setTags("");
-      setMedia("");
-    } catch (error) {
-      console.error("Failed to create post:", error);
-      setError(
-        "Failed to create post. Please check the media URL and try again.",
-      );
-    }
+    mutation.mutate(postData);
   };
 
   return (

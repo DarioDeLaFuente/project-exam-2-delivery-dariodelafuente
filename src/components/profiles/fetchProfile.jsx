@@ -11,10 +11,11 @@ const FetchProfile = async (user) => {
       },
     });
     if (!response.ok) {
-      throw new Error("Failed to fetch user profile data");
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch user profile data: ${errorText}`);
     }
     const profileData = await response.json();
-    console.log("Profile:", profileData);
+
     return profileData;
   } catch (error) {
     console.error("Error fetching user profile data:", error);

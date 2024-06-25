@@ -5,8 +5,6 @@ import NavBar from "../nav/Navbar";
 
 const Layout = () => {
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
-
   return (
     <>
       <NavBar />

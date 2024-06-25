@@ -22,7 +22,6 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      console.log("data response.json: ", data);
 
       if (response.ok) {
         saveToken(data.accessToken);

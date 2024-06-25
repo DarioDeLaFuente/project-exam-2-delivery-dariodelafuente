@@ -30,15 +30,15 @@ The client has specified the following requirements in the form of _User Stories
 - [ ] 3. A registered user may update their avatar and banner
 - [x] 4. A registered user may logout
 - [x] 5. A registered user may view a list of `Posts`
-- [ ] 6. A registered user may view a list of `Profiles`
+- [x] 6. A registered user may view a list of `Profiles`
 - [x] 7. A registered user may view a single `Post` by `id`
-- [ ] 8. A registered user may view a single `Profile` by `name`
+- [x] 8. A registered user may view a single `Profile` by `name`
 - [x] 9. A registered user may create a `Post`
-- [ ] 10. A registered user may update a `Post` they own
-- [ ] 11. A registered user may delete a `Post` they own
-- [ ] 12. A registered user may create a `Comment` on any `Post`
-- [ ] 13. A registered user may `react` to any `Post` with an emoji
-- [ ] 14. A registered user may `follow` and `unfollow` another `Profile`
+- [x] 10. A registered user may update a `Post` they own
+- [x] 11. A registered user may delete a `Post` they own
+- [x] 12. A registered user may create a `Comment` on any `Post`
+- [x] 13. A registered user may `react` to any `Post` with an emoji
+- [x] 14. A registered user may `follow` and `unfollow` another `Profile`
 
 ### Technical Restrictions
 
