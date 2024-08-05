@@ -1,9 +1,14 @@
 import React from "react";
-import { Card, Button, Col } from "react-bootstrap";
+import { Card, Button, Accordion, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import deletePost from "../profiles/deletePost";
 import deleteComment from "../posts/deleteComment";
 import { getUser } from "../../utils/storage";
+import styles from "./userProfile.module.css";
+import { FaRegTrashCan } from "react-icons/fa6";
+import { TbEdit } from "react-icons/tb";
+import { LuView } from "react-icons/lu";
+import { MdOutlineReplay } from "react-icons/md";
 
 const UserPosts = ({ posts, onDeletePost, onDeleteComment, onEditPost }) => {
   const navigate = useNavigate();
@@ -31,6 +36,17 @@ const UserPosts = ({ posts, onDeletePost, onDeleteComment, onEditPost }) => {
     }
   };
 
+  const formatDate = (dateString) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   if (posts.length === 0) {
     return <p>No posts available</p>;
   }
@@ -38,60 +54,84 @@ const UserPosts = ({ posts, onDeletePost, onDeleteComment, onEditPost }) => {
   return (
     <>
       {posts.map((post) => (
-        <Col md={4} key={post.id} className="mb-4">
-          <Card style={{ width: "18rem" }}>
-            <Card.Img src={post.media} alt="Post media" />
-            <Card.Body>
-              <Card.Title>{post.title}</Card.Title>
-              <Card.Text>{post.body}</Card.Text>
-              <Button onClick={() => navigate(`/posts/${post.id}`)}>
-                View Post
-              </Button>
-              <Button
-                variant="danger"
-                onClick={() => handleDeletePost(post.id)}
-              >
-                Delete Post
-              </Button>
-              <Button variant="primary" onClick={() => onEditPost(post)}>
-                Edit Post
-              </Button>
-              <div>
-                <h3>Comments</h3>
-                {post.comments && post.comments.length > 0 ? (
-                  post.comments.map((comment) => (
-                    <div key={comment.id} style={{ marginBottom: "10px" }}>
-                      <p>
-                        <strong>{comment.author.name}:</strong> {comment.body}
-                      </p>
-                      {comment.author.name === loggedInUser.name ? (
-                        <Button
-                          variant="danger"
-                          size="sm"
-                          onClick={() =>
-                            handleDeleteComment(post.id, comment.id)
-                          }
-                        >
-                          Delete Comment
-                        </Button>
-                      ) : (
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          onClick={() => navigate(`/posts/${post.id}`)}
-                        >
-                          Reply
-                        </Button>
-                      )}
-                    </div>
-                  ))
-                ) : (
-                  <p>No comments available</p>
-                )}
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
+        <Card key={post.id} className={`mb-3 ${styles.card}`}>
+          <Row className="g-0">
+            <Col md={4}>
+              <Card.Img
+                src={post.media}
+                alt="Post media"
+                className={styles.cardImg}
+              />
+            </Col>
+            <Col md={8}>
+              <Card.Body>
+                <Card.Title>{post.title}</Card.Title>
+                <Card.Text>{post.body}</Card.Text>
+                <LuView
+                  cursor="pointer"
+                  className="ms-2"
+                  onClick={() => navigate(`/posts/${post.id}`)}
+                />
+
+                <FaRegTrashCan
+                  cursor="pointer"
+                  onClick={() => handleDeletePost(post.id)}
+                  className="ms-2"
+                />
+
+                <TbEdit
+                  cursor="pointer"
+                  className="ms-2"
+                  onClick={() => onEditPost(post)}
+                />
+
+                <div className="mt-3">
+                  <h4>Comments</h4>
+                  {post.comments && post.comments.length > 0 ? (
+                    post.comments.map((comment) => (
+                      <Accordion
+                        defaultActiveKey="0"
+                        key={comment.id}
+                        className="mb-2"
+                      >
+                        <Accordion.Item eventKey="1">
+                          <Accordion.Header>
+                            {comment.author.name} commented:
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            {comment.body}
+                            <br />
+                            <small className="text-muted">
+                              Created: {formatDate(comment.created)}
+                            </small>
+                            {comment.author.name === loggedInUser.name ? (
+                              <FaRegTrashCan
+                                cursor="pointer"
+                                className="ms-2"
+                                onClick={() =>
+                                  handleDeleteComment(post.id, comment.id)
+                                }
+                              />
+                            ) : (
+                              <Button
+                                onClick={() => navigate(`/posts/${post.id}`)}
+                                className="ms-3"
+                              >
+                                Reply <MdOutlineReplay />
+                              </Button>
+                            )}
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    ))
+                  ) : (
+                    <p>No comments available</p>
+                  )}
+                </div>
+              </Card.Body>
+            </Col>
+          </Row>
+        </Card>
       ))}
     </>
   );

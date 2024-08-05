@@ -1,5 +1,4 @@
-//The endpoint for retrieving data
-export const BASE_URL = "https://nf-api.onrender.com/api/v1";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const ALL_PROFILES_URL = `${BASE_URL}/social/profiles`;
 export const PROFILE_URL = `${BASE_URL}/social/profiles/`;

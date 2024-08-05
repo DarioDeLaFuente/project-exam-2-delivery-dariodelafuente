@@ -1,0 +1,59 @@
+.carousel {
+  background-color: #fff;
+  margin-bottom: 1rem;
+}
+.card {
+  cursor: pointer;
+  margin: 10px auto;
+  width: 100px;
+  text-align: center;
+  border: none;
+  background: transparent;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardImage {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+  border: 6px solid #dddddd5e;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cardText {
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 105%;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  background: 0 0;
+  border: 0;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+
+@media (max-width: 576px) {
+  .cardImage {
+    width: 50px;
+    height: 50px;
+  }
+}

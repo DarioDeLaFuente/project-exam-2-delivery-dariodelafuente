@@ -1,26 +1,22 @@
+import axios from "axios";
+import { SINGLE_PROFILE_URL } from "../../constants/apiUrl";
 import { getToken } from "../../utils/storage";
-import { PROFILE_URL } from "../../constants/apiUrl";
 
-const FetchProfile = async (user) => {
+const fetchProfile = async (name) => {
   try {
-    const accessToken = getToken();
-    const response = await fetch(PROFILE_URL + user, {
+    const token = getToken();
+    console.log("Token used in fetchProfile:", token);
+    const response = await axios.get(SINGLE_PROFILE_URL(name), {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Failed to fetch user profile data: ${errorText}`);
-    }
-    const profileData = await response.json();
-
-    return profileData;
+    return response.data;
   } catch (error) {
     console.error("Error fetching user profile data:", error);
-    throw error;
+    throw new Error(`Failed to fetch user profile data: ${error}`);
   }
 };
 
-export default FetchProfile;
+export default fetchProfile;

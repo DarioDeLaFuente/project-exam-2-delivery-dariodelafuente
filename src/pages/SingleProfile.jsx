@@ -4,8 +4,11 @@ import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import { SINGLE_PROFILE_URL, PROFILE_POSTS_URL } from "../constants/apiUrl";
 import { getToken, getUser } from "../utils/storage";
-import { Container, Image, Card, Row, Col, Button } from "react-bootstrap";
+import { Image, Card, Row, Col, Button } from "react-bootstrap";
 import FollowButton from "../components/profiles/FollowButton";
+import PlaceholderImage from "../components/posts/PlaceholderImage";
+import PlaceholderAvatarImage from "../components/placeholder/PlaceholderAvatarImage";
+import styles from "../components/profiles/userProfile.module.css";
 
 const fetchProfile = async (name) => {
   const accessToken = getToken();
@@ -62,16 +65,28 @@ const SingleProfile = () => {
   };
 
   return (
-    <Container>
-      <Card className="mb-4">
-        <Card.Img variant="top" src={profile.banner} />
-        <Card.Body className="text-center">
-          <Image
-            src={profile.avatar}
-            roundedCircle
-            style={{ width: "100px", height: "100px" }}
-            className="mb-3"
+    <>
+      <Card className={`mb-4 ${styles.profileCard}`}>
+        {profile.banner ? (
+          <Card.Img
+            variant="top"
+            className={styles.cardavatarbanner}
+            src={profile.banner}
           />
+        ) : (
+          <PlaceholderImage />
+        )}
+        <Card.Body className="text-center">
+          {profile.avatar ? (
+            <Image
+              className={styles.cardavatar_singel_profil}
+              src={profile.avatar}
+              roundedCircle
+              style={{ width: "100px", height: "100px" }}
+            />
+          ) : (
+            <PlaceholderAvatarImage />
+          )}
           <Card.Title>{profile.name}</Card.Title>
           <Card.Text>{profile.email}</Card.Text>
           <Card.Text>Posts: {profile._count.posts}</Card.Text>
@@ -89,10 +104,34 @@ const SingleProfile = () => {
         {posts.map((post) => (
           <Col key={post.id} md={4} className="mb-4">
             <Card>
-              {post.media && <Card.Img variant="top" src={post.media} />}
+              {post.media ? (
+                <Card.Img
+                  variant="top"
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: "350px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#f0f0f0",
+                  }}
+                  src={post.media}
+                />
+              ) : (
+                <PlaceholderImage />
+              )}
               <Card.Body>
                 <Card.Title>{post.title}</Card.Title>
-                <Card.Text>{post.body}</Card.Text>
+                <Card.Text
+                  style={{
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                  }}
+                >
+                  {post.body}
+                </Card.Text>
                 <Button onClick={() => navigate(`/posts/${post.id}`)}>
                   View Post
                 </Button>
@@ -101,7 +140,7 @@ const SingleProfile = () => {
           </Col>
         ))}
       </Row>
-    </Container>
+    </>
   );
 };
 

@@ -29,7 +29,7 @@ const getUser = () => {
 
 export { getUser };
 
-export const isLoggedIn = () => !!getFromStorage(userKey);
+export const isLoggedIn = () => !!getToken();
 
 function saveToStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
@@ -37,5 +37,14 @@ function saveToStorage(key, data) {
 
 function getFromStorage(key) {
   const data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : null;
+  try {
+    return data ? JSON.parse(data) : null;
+  } catch (e) {
+    console.error(`Error parsing storage item ${key}:`, e);
+    return null;
+  }
 }
+
+export const clearStorage = () => {
+  localStorage.clear();
+};

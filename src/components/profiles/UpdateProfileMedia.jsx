@@ -1,11 +1,10 @@
-// src/components/profiles/UpdateProfileMedia.jsx
-
 import React, { useState } from "react";
 import axios from "axios";
 import { useQueryClient } from "react-query";
 import { Form, Button, Modal } from "react-bootstrap";
 import { getToken, getUser } from "../../utils/storage";
 import { SINGLE_PROFILE_URL } from "../../constants/apiUrl";
+import { FaUserEdit } from "react-icons/fa";
 
 const updateProfileMedia = async (name, media) => {
   const accessToken = getToken();
@@ -40,10 +39,16 @@ const UpdateProfileMedia = ({ user }) => {
 
   return (
     <>
-      <Button variant="primary" onClick={() => setShowModal(true)}>
-        Update Profile Media
-      </Button>
-
+      <div>
+        <Button
+          cursor="pointer"
+          className="m-2"
+          variant="primary"
+          onClick={() => setShowModal(true)}
+        >
+          <FaUserEdit />
+        </Button>
+      </div>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Update Profile Media</Modal.Title>

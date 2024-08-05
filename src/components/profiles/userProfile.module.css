@@ -1,0 +1,50 @@
+.profileCard {
+  position: relative;
+  overflow: hidden;
+}
+
+.cardavatarbanner {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.cardavatar {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid white;
+  position: absolute;
+  bottom: 250px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.cardavatar_singel_profil {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid white;
+  position: absolute;
+  bottom: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.cardBody {
+  margin-top: 70px;
+  text-align: center;
+}
+
+.cardImg {
+  height: 100%;
+  object-fit: cover;
+}
+
+.card {
+  max-width: 100%;
+}

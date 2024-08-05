@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { GrSend } from "react-icons/gr";
 
 const CommentForm = ({ postId, onComment }) => {
   const [comment, setComment] = useState("");
@@ -12,7 +13,7 @@ const CommentForm = ({ postId, onComment }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="comment">
-        <Form.Label>Comment</Form.Label>
+        <Form.Label>Add a comment..</Form.Label>
         <Form.Control
           type="text"
           value={comment}
@@ -20,7 +21,10 @@ const CommentForm = ({ postId, onComment }) => {
           required
         />
       </Form.Group>
-      <Button type="submit">Submit</Button>
+      <Button className="mt-3" type="submit">
+        Post
+        <GrSend />
+      </Button>
     </Form>
   );
 };

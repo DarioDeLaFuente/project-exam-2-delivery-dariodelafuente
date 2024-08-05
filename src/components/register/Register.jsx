@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { REGISTER_URL } from "../../constants/apiUrl";
 import { saveToken, saveUser } from "../../utils/storage";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -65,70 +69,79 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
+    <Container className="mt-5">
+      <h2>Sign up</h2>
+      <Form onSubmit={handleSubmit}>
+        <FloatingLabel controlId="floatingName" label="Name" className="mb-3">
+          <Form.Control
             type="text"
-            id="name"
             name="name"
             placeholder="Name"
             value={formData.name}
             onChange={handleChange}
             required
           />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
+        </FloatingLabel>
+        <FloatingLabel
+          controlId="floatingEmail"
+          label="Email address"
+          className="mb-3"
+        >
+          <Form.Control
             type="email"
-            id="email"
             name="email"
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
             required
           />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
+        </FloatingLabel>
+        <FloatingLabel
+          controlId="floatingPassword"
+          label="Password"
+          className="mb-3"
+        >
+          <Form.Control
             type="password"
-            id="password"
             name="password"
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
             required
           />
-        </div>
-        <div>
-          <label htmlFor="avatar">Avatar (optional)</label>
-          <input
+        </FloatingLabel>
+        <FloatingLabel
+          controlId="floatingAvatar"
+          label="Avatar URL (optional)"
+          className="mb-3"
+        >
+          <Form.Control
             type="url"
-            id="avatar"
             name="avatar"
             placeholder="Avatar URL"
             value={formData.avatar}
             onChange={handleChange}
           />
-        </div>
-        <div>
-          <label htmlFor="banner">Banner (optional)</label>
-          <input
+        </FloatingLabel>
+        <FloatingLabel
+          controlId="floatingBanner"
+          label="Banner URL (optional)"
+          className="mb-3"
+        >
+          <Form.Control
             type="url"
-            id="banner"
             name="banner"
             placeholder="Banner URL"
             value={formData.banner}
             onChange={handleChange}
           />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      {error && <p>{error}</p>}
-    </div>
+        </FloatingLabel>
+        <Button type="submit" variant="primary">
+          Sign up
+        </Button>
+      </Form>
+      {error && <p className="text-danger mt-3">{error}</p>}
+    </Container>
   );
 };
 

@@ -1,0 +1,9 @@
+.reactionbutton {
+  background-color: rgba(0, 0, 0, 0.413);
+  border: none;
+  margin-left: 5px;
+}
+.reactionbutton:hover {
+  background-color: rgb(0, 0, 0);
+  border: none;
+}

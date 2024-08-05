@@ -6,9 +6,9 @@ import UserProfile from "../components/profiles/userProfile";
 import UserPosts from "../components/profiles/userPosts";
 import CreatePostForm from "../components/profiles/createPostForm";
 import UpdatePostForm from "../components/profiles/UpdatePostForm";
-import UpdateProfileMedia from "../components/profiles/UpdateProfileMedia";
+
 import { getUser } from "../utils/storage";
-import { Container, Row, Modal } from "react-bootstrap";
+import { Row, Modal, Container } from "react-bootstrap";
 
 const fetchUserProfile = async (name) => {
   return await FetchProfile(name);
@@ -77,7 +77,7 @@ const Profile = () => {
   };
 
   if (userLoading || postsLoading) {
-    return <p>Loading...</p>;
+    return <p>Loading...xxxx</p>;
   }
 
   if (userError) {
@@ -89,15 +89,13 @@ const Profile = () => {
   }
 
   return (
-    <Container>
-      <h1>User Profile</h1>
+    <>
       {user ? (
-        <>
+        <Container>
           <UserProfile user={user} />
-          <UpdateProfileMedia user={user} />
-          <CreatePostForm />
+          <CreatePostForm userName={name} />
           <h2>User Posts</h2>
-          <Row>
+          <Row className="g-0">
             <UserPosts
               posts={posts}
               onDeletePost={handleDeletePost}
@@ -121,11 +119,11 @@ const Profile = () => {
               )}
             </Modal.Body>
           </Modal>
-        </>
+        </Container>
       ) : (
         <p>User data not found in local storage</p>
       )}
-    </Container>
+    </>
   );
 };
 

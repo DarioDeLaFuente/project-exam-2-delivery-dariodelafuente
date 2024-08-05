@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { saveToken, saveUser } from "../../utils/storage";
-import { useNavigate } from "react-router-dom";
 import { LOGIN_URL } from "../../constants/apiUrl";
 import fetchProfile from "../profiles/fetchProfile";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,9 +27,10 @@ const Login = () => {
 
       if (response.ok) {
         saveToken(data.accessToken);
-        const profileData = await fetchProfile(data.name);
+        const profileData = await fetchProfile(data.name, data.accessToken);
         saveUser(profileData);
-        navigate("/Profile");
+        navigate("/profile");
+        window.location.reload();
       } else {
         setError("Invalid email or password");
       }
@@ -38,37 +41,39 @@ const Login = () => {
 
   return (
     <>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button type="submit">Login</button>
-        </form>
-        {error && <p>{error}</p>}
-      </div>
-      <p>Dont have a account?</p>
+      <h2>Login</h2>
+      <Form onSubmit={handleSubmit}>
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Email address"
+          className="mb-3"
+        >
+          <Form.Control
+            type="email"
+            placeholder="name@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </FloatingLabel>
 
-      <Link as={Link} to="/register">
-        Register
-      </Link>
+        <FloatingLabel controlId="floatingPassword" label="Password">
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </FloatingLabel>
+
+        {error && <p className="text-danger mt-3">{error}</p>}
+
+        <Button className="mt-3" type="submit">
+          Login
+        </Button>
+      </Form>
+
+      <p className="mt-3">Don't have an account?</p>
+      <Link to="/register">Sign up</Link>
     </>
   );
 };

@@ -1,0 +1,99 @@
+.card {
+  box-shadow: -2px 4px 15px rgb(0 0 0 / 26%);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 350px;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: -2px 4px 15px rgb(0, 0, 0);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 350px;
+  cursor: pointer;
+  border: none;
+  overflow: hidden;
+}
+
+.card img,
+.placeholder {
+  object-fit: cover;
+  width: 100%;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.placeholderText {
+  color: #aaa;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    rgb(0 0 0 / 57%) 0%,
+    rgb(255 255 255 / 0%) 100%
+  );
+  color: #fff;
+  padding: clamp(0.938rem, 5vw, 1.563rem);
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  transition: 0.5s ease-in-out;
+  overflow: hidden;
+}
+
+.card__rating {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: #fff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.card__rating .star-icon {
+  margin-right: 5px;
+}
+
+.card__title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0;
+  top: 19px;
+}
+
+.card__subtitle {
+  font-size: 1rem;
+  margin: 0;
+  height: 4.6em;
+  overflow: hidden;
+}
+
+.card__Login {
+  width: 300px;
+  height: 254px;
+  border-radius: 50px;
+  background: #e0e0e0;
+  box-shadow:
+    20px 20px 60px #bebebe,
+    -20px -20px 60px #ffffff;
+}
+.card__Login__subtitle {
+  padding: 20px;
+}

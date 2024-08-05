@@ -4,9 +4,12 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { POSTS_URL } from "../constants/apiUrl";
 import axios from "axios";
 import { getToken, getUser } from "../utils/storage";
-import { Card, Container, Button } from "react-bootstrap";
+import { Card, Button, Image } from "react-bootstrap";
 import ReactionButtons from "../components/posts/ReactionButtons";
 import CommentForm from "../components/posts/CommentForm";
+import PlaceholderImage from "../components/posts/PlaceholderImage";
+import styles from "./SinglePost.module.css";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 const fetchPost = async (id) => {
   const accessToken = getToken();
@@ -41,7 +44,10 @@ const SinglePost = () => {
         setReactions(post.reactions);
       }
       if (post.comments) {
-        setComments(post.comments);
+        const sortedComments = post.comments.sort(
+          (a, b) => new Date(a.created) - new Date(b.created),
+        );
+        setComments(sortedComments);
       }
     }
   }, [post]);
@@ -136,7 +142,11 @@ const SinglePost = () => {
   };
 
   const updateComments = (newComment) => {
-    setComments((prevComments) => [...prevComments, newComment]);
+    setComments((prevComments) =>
+      [...prevComments, newComment].sort(
+        (a, b) => new Date(a.created) - new Date(b.created),
+      ),
+    );
   };
 
   const handleReact = (symbol) => {
@@ -151,8 +161,19 @@ const SinglePost = () => {
     deleteCommentMutation.mutate(commentId);
   };
 
+  const formatDate = (dateString) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p>Loading..tttt.</p>;
   }
 
   if (error) {
@@ -164,12 +185,10 @@ const SinglePost = () => {
   }
 
   return (
-    <Container>
+    <>
       <Card>
-        <Card.Img src={post.media} alt="Post media" />
         <Card.Body>
           <Card.Title>{post.title}</Card.Title>
-          <Card.Text>{post.body}</Card.Text>
           <Card.Text>
             Author:{" "}
             {post.author && (
@@ -181,58 +200,71 @@ const SinglePost = () => {
               </Button>
             )}
           </Card.Text>
-          <Card.Text>Comments: {comments.length}</Card.Text>
-          <div>
-            {reactions.length > 0 ? (
-              reactions.map((reaction) => (
-                <ReactionButtons
-                  key={reaction.symbol}
-                  reaction={reaction}
-                  onReact={handleReact}
-                />
-              ))
-            ) : (
-              <ReactionButtons
-                reaction={{ symbol: "👍", count: 0 }}
-                onReact={handleReact}
-              />
-            )}
+          {post.media ? (
+            <Card.Img src={post.media} alt="Post media" />
+          ) : (
+            <PlaceholderImage />
+          )}
+
+          <div className="mt-3">
+            <ReactionButtons
+              reaction={{
+                symbol: "👍",
+                count: reactions.find((r) => r.symbol === "👍")?.count || 0,
+              }}
+              onReact={() => handleReact("👍")}
+            />
+            <ReactionButtons
+              reaction={{
+                symbol: "👎",
+                count: reactions.find((r) => r.symbol === "👎")?.count || 0,
+              }}
+              onReact={() => handleReact("👎")}
+            />
           </div>
-          <div>
-            <h3>Comments</h3>
+          <Card.Text className="mt-2">{post.body}</Card.Text>
+          <Card.Text className="mt-2">{comments.length} Comments</Card.Text>
+        </Card.Body>
+      </Card>
+      <Card className="mt-3">
+        <Card.Body>
+          <CommentForm postId={id} onComment={handleComment} />
+          <div className="mt-3">
+            <h4>Comments</h4>
             {comments.map((comment) => (
-              <div key={comment.id} style={{ marginBottom: "10px" }}>
-                <p>
-                  <strong>
-                    {comment.author && (
-                      <Button
+              <div key={comment.id}>
+                {comment.author && (
+                  <Card className="mt-1">
+                    <Card.Header>
+                      <Image
+                        src={comment.author.avatar}
                         variant="link"
+                        className={styles.imagePost}
                         onClick={() =>
                           navigate(`/profile/${comment.author.name}`)
                         }
-                      >
-                        {comment.author.name}
-                      </Button>
-                    )}
-                  </strong>{" "}
-                  {comment.body}
-                </p>
-                {comment.author.name === loggedInUser.name && (
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={() => handleDeleteComment(comment.id)}
-                  >
-                    Delete Comment
-                  </Button>
+                        thumbnail
+                      />
+                      {comment.author.name}
+                    </Card.Header>
+                    <Card.Body>
+                      <Card.Title> {comment.body}</Card.Title>
+                      <Card.Text>{formatDate(comment.created)}</Card.Text>
+                      {comment.author.name === loggedInUser.name && (
+                        <FaRegTrashCan
+                          cursor="pointer"
+                          onClick={() => handleDeleteComment(comment.id)}
+                        />
+                      )}
+                    </Card.Body>
+                  </Card>
                 )}
               </div>
             ))}
           </div>
-          <CommentForm postId={id} onComment={handleComment} />
         </Card.Body>
       </Card>
-    </Container>
+    </>
   );
 };
 

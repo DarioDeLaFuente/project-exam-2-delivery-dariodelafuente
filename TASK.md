@@ -27,7 +27,7 @@ The client has specified the following requirements in the form of _User Stories
 
 - [x] 1. A user with a `stud.noroff.no` email may register
 - [x] 2. A registered user may login
-- [ ] 3. A registered user may update their avatar and banner
+- [x] 3. A registered user may update their avatar and banner
 - [x] 4. A registered user may logout
 - [x] 5. A registered user may view a list of `Posts`
 - [x] 6. A registered user may view a list of `Profiles`
@@ -46,7 +46,7 @@ The company CTO has set the following technical restrictions:
 
 - [x] 1. Must use an approved `JavaScript Framework`
 - [x] 2. Must use an approved `CSS Framework`
-- [ ] 3. Must be hosted on an approved `Static Host`
+- [x] 3. Must be hosted on an approved `Static Host`
 - [x] 4. Must use an approved `Design Application`
 - [x] 5. Must use an approved `Planning Application`
 
@@ -58,8 +58,8 @@ The Product Owner has requested links to the following:
 - [x] 2. A design prototype
 - [x] 3. A style guide
 - [x] 4. A kanban project board
-- [ ] 5. A repository link
-- [ ] 6. A hosted application demo link
+- [x] 5. A repository link
+- [X ] 6. A hosted application demo link
 
 ## Approved Resources
 

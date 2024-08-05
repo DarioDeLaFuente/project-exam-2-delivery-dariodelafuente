@@ -4,6 +4,9 @@ import { getToken } from "../../utils/storage";
 import { Button } from "react-bootstrap";
 import { SINGLE_PROFILE_URL } from "../../constants/apiUrl";
 
+import { RiUserFollowFill } from "react-icons/ri";
+import { RiUserUnfollowFill } from "react-icons/ri";
+
 const followProfile = async (profileName) => {
   const accessToken = getToken();
   const response = await axios.put(
@@ -62,7 +65,15 @@ const FollowButton = ({
 
   return (
     <Button variant={isFollowing ? "danger" : "primary"} onClick={handleFollow}>
-      {isFollowing ? "Unfollow" : "Follow"}
+      {isFollowing ? (
+        <>
+          Unfollow <RiUserUnfollowFill />
+        </>
+      ) : (
+        <>
+          Follow <RiUserFollowFill />
+        </>
+      )}
     </Button>
   );
 };
