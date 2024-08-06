@@ -5,15 +5,18 @@ import FooterNav from "../footer/FooterNav";
 import NavBar from "../nav/Navbar";
 
 import ProfileCarousel from "../../components/profiles/ProfileCarousel";
-import { isLoggedIn } from "../../utils/storage";
+//import { isLoggedIn } from "../../utils/storage";
+import { useAuth } from "../../context/AuthContext";
 
 const Layout = () => {
-  const loggedIn = isLoggedIn();
+  //const loggedIn = isLoggedIn(); {loggedIn && <ProfileCarousel />}
+  const { user } = useAuth();
 
   return (
     <>
       <NavBar />
-      {loggedIn && <ProfileCarousel />}
+      {user && <ProfileCarousel />}
+      
       <Container style={{ minHeight: "90vh" }}>
         <Outlet />
       </Container>

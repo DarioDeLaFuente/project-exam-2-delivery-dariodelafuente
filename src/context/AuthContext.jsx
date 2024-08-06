@@ -6,9 +6,9 @@ import fetchProfile from '../components/profiles/fetchProfile';
 
 const AuthContext = createContext();
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+//export const useAuth = () => {
+//  return useContext(AuthContext);
+//};
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(getUser());
@@ -50,3 +50,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);
