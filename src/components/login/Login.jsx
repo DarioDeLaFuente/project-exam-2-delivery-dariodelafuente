@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { saveToken, saveUser } from "../../utils/storage";
-import { LOGIN_URL } from "../../constants/apiUrl";
-import fetchProfile from "../profiles/fetchProfile";
+import { useAuth } from "../../context/AuthContext";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,24 +15,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(LOGIN_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await response.json();
-
-      if (response.ok) {
-        saveToken(data.accessToken);
-        const profileData = await fetchProfile(data.name, data.accessToken);
-        saveUser(profileData);
-        navigate("/profile");
-        window.location.reload();
-      } else {
-        setError("Invalid email or password");
-      }
+      await login(email, password);
+      navigate("/profile");
     } catch (error) {
       setError("Invalid email or password");
     }
@@ -43,11 +26,7 @@ const Login = () => {
     <>
       <h2>Login</h2>
       <Form onSubmit={handleSubmit}>
-        <FloatingLabel
-          controlId="floatingInput"
-          label="Email address"
-          className="mb-3"
-        >
+        <FloatingLabel controlId="floatingInput" label="Email address" className="mb-3">
           <Form.Control
             type="email"
             placeholder="name@example.com"
