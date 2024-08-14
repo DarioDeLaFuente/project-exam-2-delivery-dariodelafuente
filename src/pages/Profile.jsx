@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
-import FetchProfile from "../components/profiles/FetchProfile";
+import fetchProfile from "../components/profiles/fetchProfile";
 import FetchUserPosts from "../components/profiles/FetchUserPosts";
 import UserProfile from "../components/profiles/userProfile";
 import UserPosts from "../components/profiles/userPosts";
-import CreatePostForm from "../components/profiles/CreatePostForm";
+import createPostForm from "../components/profiles/createPostForm";
 import UpdatePostForm from "../components/profiles/UpdatePostForm";
 
 import { getUser } from "../utils/storage";
 import { Row, Modal, Container } from "react-bootstrap";
 
 const fetchUserProfile = async (name) => {
-  return await FetchProfile(name);
+  return await fetchProfile(name);
 };
 
 const Profile = () => {

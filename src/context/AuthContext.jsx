@@ -8,7 +8,7 @@ import {
 } from "../utils/storage";
 import { useNavigate } from "react-router-dom";
 import { LOGIN_URL } from "../constants/apiUrl";
-import FetchProfile from "../components/profiles/FetchProfile";
+import fetchProfile from "../components/profiles/fetchProfile";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     const data = await response.json();
     if (response.ok) {
       saveToken(data.accessToken);
-      const profileData = await FetchProfile(data.name, data.accessToken);
+      const profileData = await fetchProfile(data.name, data.accessToken);
       saveUser(profileData);
       setUser(profileData);
     } else {
