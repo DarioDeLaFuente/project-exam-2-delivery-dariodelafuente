@@ -26,7 +26,11 @@ const Login = () => {
     <>
       <h2>Login</h2>
       <Form onSubmit={handleSubmit}>
-        <FloatingLabel controlId="floatingInput" label="Email address" className="mb-3">
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Email address"
+          className="mb-3"
+        >
           <Form.Control
             type="email"
             placeholder="name@example.com"

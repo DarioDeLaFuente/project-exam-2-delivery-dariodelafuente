@@ -97,3 +97,27 @@
 .card__Login__subtitle {
   padding: 20px;
 }
+
+.gridcontainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+}
+
+@media (min-width: 768px) {
+  .gridcontainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.griditem {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.griditemlarge {
+  grid-column: span 2;
+  grid-row: span 1;
+}

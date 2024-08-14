@@ -21,7 +21,7 @@ const NavBar = () => {
         </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className={`ml-auto ${styles.nav}`}>
-            {user  ? (
+            {user ? (
               <>
                 <Nav.Link as={Link} to="/profile" className={styles.navLink}>
                   <FaRegCircleUser className={styles.navbaravatar} />

@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, Button, Accordion, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import deletePost from "../profiles/deletePost";
-import deleteComment from "../posts/deleteComment";
+import deletePost from "./DeletePost";
+import DeleteComment from "../posts/DeleteComment";
 import { getUser } from "../../utils/storage";
 import styles from "./userProfile.module.css";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -25,7 +25,7 @@ const UserPosts = ({ posts, onDeletePost, onDeleteComment, onEditPost }) => {
 
   const handleDeleteComment = async (postId, commentId) => {
     try {
-      await deleteComment(postId, commentId);
+      await DeleteComment(postId, commentId);
       onDeleteComment(postId, commentId);
     } catch (error) {
       if (error.message.includes("403")) {

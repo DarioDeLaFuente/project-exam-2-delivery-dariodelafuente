@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { POSTS_URL } from "../../constants/apiUrl";
 import { getToken } from "../../utils/storage";
 import axios from "axios";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ReactionButtons from "../../components/posts/ReactionButtons";
 import styles from "./Posts.module.css";
@@ -96,13 +96,16 @@ const Posts = () => {
 
   return (
     <Container>
-      <Row>
-        {posts.map((post) => (
-          <Col md={4} key={post.id} className="mb-2">
-            <Card
-              className={styles.card}
-              onClick={() => navigate(`/posts/${post.id}`)}
-            >
+      <div className={styles.gridcontainer}>
+        {posts.map((post, index) => (
+          <div
+            key={post.id}
+            className={`${styles.griditem} ${
+              index === 0 || index === 9 ? styles.griditemlarge : ""
+            }`}
+            onClick={() => navigate(`/posts/${post.id}`)}
+          >
+            <Card className={styles.card}>
               {post.media ? (
                 <Card.Img
                   className={styles.placeholder}
@@ -147,9 +150,9 @@ const Posts = () => {
                 </div>
               </div>
             </Card>
-          </Col>
+          </div>
         ))}
-      </Row>
+      </div>
     </Container>
   );
 };

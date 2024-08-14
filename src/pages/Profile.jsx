@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
-import FetchProfile from "../components/profiles/fetchProfile";
-import FetchUserPosts from "../components/profiles/fetchUserPosts";
+import FetchProfile from "../components/profiles/FetchProfile";
+import FetchUserPosts from "../components/profiles/FetchUserPosts";
 import UserProfile from "../components/profiles/userProfile";
 import UserPosts from "../components/profiles/userPosts";
-import CreatePostForm from "../components/profiles/createPostForm";
+import CreatePostForm from "../components/profiles/CreatePostForm";
 import UpdatePostForm from "../components/profiles/UpdatePostForm";
 
 import { getUser } from "../utils/storage";
