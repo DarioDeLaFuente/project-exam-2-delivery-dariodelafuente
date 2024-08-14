@@ -4,7 +4,7 @@ import fetchProfile from "../components/profiles/fetchProfile";
 import FetchUserPosts from "../components/profiles/FetchUserPosts";
 import UserProfile from "../components/profiles/userProfile";
 import UserPosts from "../components/profiles/userPosts";
-import createPostForm from "../components/profiles/createPostForm";
+import CreatePostForm from "../components/profiles/createPostForm";
 import UpdatePostForm from "../components/profiles/UpdatePostForm";
 
 import { getUser } from "../utils/storage";
