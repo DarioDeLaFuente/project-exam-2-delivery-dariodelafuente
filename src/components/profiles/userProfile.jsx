@@ -6,7 +6,7 @@ import UpdateProfileMedia from "../../components/profiles/UpdateProfileMedia";
 
 const UserProfile = ({ user }) => {
   if (!user) {
-    return <p>Loading...TEST</p>;
+    return <p>Loading...</p>;
   }
 
   return (
