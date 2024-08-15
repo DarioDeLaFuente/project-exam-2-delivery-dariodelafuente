@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button, Accordion, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import deletePost from "./DeletePost";
+import deletePost from "../profiles/deletePost";
 import DeleteComment from "../posts/DeleteComment";
 import { getUser } from "../../utils/storage";
 import styles from "./userProfile.module.css";
