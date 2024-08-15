@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import fetchProfile from "../components/profiles/fetchProfile";
-import FetchUserPosts from "../components/profiles/FetchUserPosts";
+import fetchUserPosts from "../components/profiles/FetchUserPosts";
 import UserProfile from "../components/profiles/userProfile";
 import UserPosts from "../components/profiles/userPosts";
 import CreatePostForm from "../components/profiles/createPostForm";
@@ -34,7 +34,7 @@ const Profile = () => {
     data: userPosts,
     isLoading: postsLoading,
     error: postsError,
-  } = useQuery(["userPosts", name], () => FetchUserPosts(name), {
+  } = useQuery(["userPosts", name], () => fetchUserPosts(name), {
     enabled: !!name,
     onSuccess: (data) => setPosts(data),
   });
