@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { useQueryClient } from "react-query";
 import { Form, Button, Modal } from "react-bootstrap";
-import { getToken, getUser } from "../../utils/storage";
+import { getToken } from "../../utils/storage";
 import { SINGLE_PROFILE_URL } from "../../constants/apiUrl";
 import { FaUserEdit } from "react-icons/fa";
 
@@ -82,6 +83,14 @@ const UpdateProfileMedia = ({ user }) => {
       </Modal>
     </>
   );
+};
+
+UpdateProfileMedia.propTypes = {
+  user: PropTypes.shape({
+    banner: PropTypes.string,
+    avatar: PropTypes.string,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default UpdateProfileMedia;

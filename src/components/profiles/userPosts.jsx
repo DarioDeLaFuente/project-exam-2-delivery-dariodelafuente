@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import { Card, Button, Accordion, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import deletePost from "../profiles/deletePost";
@@ -135,6 +135,30 @@ const UserPosts = ({ posts, onDeletePost, onDeleteComment, onEditPost }) => {
       ))}
     </>
   );
+};
+
+UserPosts.propTypes = {
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+      media: PropTypes.string,
+      comments: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          body: PropTypes.string.isRequired,
+          created: PropTypes.string.isRequired,
+          author: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+          }).isRequired,
+        }),
+      ),
+    }),
+  ).isRequired,
+  onDeletePost: PropTypes.func.isRequired,
+  onDeleteComment: PropTypes.func.isRequired,
+  onEditPost: PropTypes.func.isRequired,
 };
 
 export default UserPosts;

@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
@@ -9,6 +8,7 @@ import FollowButton from "../components/profiles/FollowButton";
 import PlaceholderImage from "../components/posts/PlaceholderImage";
 import PlaceholderAvatarImage from "../components/placeholder/PlaceholderAvatarImage";
 import styles from "../components/profiles/userProfile.module.css";
+import LoaderBox from "../components/loader/LoaderBox";
 
 const fetchProfile = async (name) => {
   const accessToken = getToken();
@@ -50,7 +50,7 @@ const SingleProfile = () => {
     error: postsError,
   } = useQuery(["profilePosts", name], () => fetchProfilePosts(name));
 
-  if (profileLoading || postsLoading) return <p>Loading profile...</p>;
+  if (profileLoading || postsLoading) return <LoaderBox />;
   if (profileError) return <p>Error loading profile: {profileError.message}</p>;
   if (postsError) return <p>Error loading posts: {postsError.message}</p>;
 

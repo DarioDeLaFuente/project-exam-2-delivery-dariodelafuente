@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
@@ -55,7 +55,7 @@ const Login = () => {
         </Button>
       </Form>
 
-      <p className="mt-3">Don't have an account?</p>
+      <p className="mt-3">Don&apos;t have an account?</p>
       <Link to="/register">Sign up</Link>
     </>
   );

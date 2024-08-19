@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { POSTS_URL } from "../../constants/apiUrl";
 import { getToken } from "../../utils/storage";
 import axios from "axios";
@@ -8,10 +8,12 @@ import ReactionButtons from "../../components/posts/ReactionButtons";
 import styles from "./Posts.module.css";
 import PostPlaceholderImage from "./PostPlaceholderImage";
 import Loader from "../../components/loader/Loader/";
+import LoaderBox from "../../components/loader/LoaderBox/";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,9 +32,15 @@ const Posts = () => {
             "Content-Type": "application/json",
           },
         });
+
+        if (!response.data || response.data.length === 0) {
+          throw new Error("No posts found");
+        }
+
         setPosts(response.data);
       } catch (error) {
         console.error("Failed to fetch posts:", error);
+        setError(error);
       } finally {
         setLoading(false);
       }
@@ -87,11 +95,15 @@ const Posts = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoaderBox />;
   }
 
   if (!getToken()) {
     return <Loader />;
+  }
+
+  if (error) {
+    return <p>Error loading posts: {error.message}</p>;
   }
 
   return (

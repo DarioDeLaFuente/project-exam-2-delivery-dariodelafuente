@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./PostPlaceholderImage.module.css";
 
 const PostPlaceholderImage = () => {

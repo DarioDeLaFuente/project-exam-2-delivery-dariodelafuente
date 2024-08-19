@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import fetchProfile from "../components/profiles/fetchProfile";
 import fetchUserPosts from "../components/profiles/fetchUserPosts";
@@ -6,6 +6,7 @@ import UserProfile from "../components/profiles/userProfile";
 import UserPosts from "../components/profiles/userPosts";
 import CreatePostForm from "../components/profiles/createPostForm";
 import UpdatePostForm from "../components/profiles/UpdatePostForm";
+import LoaderBox from "../components/loader/LoaderBox";
 
 import { getUser } from "../utils/storage";
 import { Row, Modal, Container } from "react-bootstrap";
@@ -31,7 +32,7 @@ const Profile = () => {
   });
 
   const {
-    data: userPosts,
+    //data: userPosts,
     isLoading: postsLoading,
     error: postsError,
   } = useQuery(["userPosts", name], () => fetchUserPosts(name), {
@@ -77,7 +78,7 @@ const Profile = () => {
   };
 
   if (userLoading || postsLoading) {
-    return <p>Loading...xxxx</p>;
+    return <LoaderBox />;
   }
 
   if (userError) {

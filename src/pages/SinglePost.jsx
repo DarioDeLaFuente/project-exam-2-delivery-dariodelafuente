@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { POSTS_URL } from "../constants/apiUrl";
@@ -10,6 +10,7 @@ import CommentForm from "../components/posts/CommentForm";
 import PlaceholderImage from "../components/posts/PlaceholderImage";
 import styles from "./SinglePost.module.css";
 import { FaRegTrashCan } from "react-icons/fa6";
+import LoaderBox from "../components/loader/LoaderBox";
 
 const fetchPost = async (id) => {
   const accessToken = getToken();
@@ -173,7 +174,7 @@ const SinglePost = () => {
   };
 
   if (isLoading) {
-    return <p>Loading..tttt.</p>;
+    return <LoaderBox />;
   }
 
   if (error) {

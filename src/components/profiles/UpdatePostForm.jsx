@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { POSTS_URL } from "../../constants/apiUrl";
 import { getToken } from "../../utils/storage";
@@ -77,6 +78,17 @@ const UpdatePostForm = ({ post, onUpdate }) => {
       </Button>
     </Form>
   );
+};
+
+UpdatePostForm.propTypes = {
+  post: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    media: PropTypes.string,
+  }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default UpdatePostForm;

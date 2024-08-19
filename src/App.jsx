@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Contact from "./pages/Contact";
@@ -12,6 +12,7 @@ import SinglePost from "./pages/SinglePost";
 import Layout from "./components/layout/Layout";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthProvider } from "./context/AuthContext";
+import ErrorBoundary from "./components/errorBoundary/ErrorBoundary";
 
 const queryClient = new QueryClient();
 
@@ -20,18 +21,20 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Router>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="profile/:name" element={<SingleProfile />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="posts/:id" element={<SinglePost />} />
-              <Route path="contact" element={<Contact />} />
-              <Route path="about" element={<About />} />
-            </Route>
-          </Routes>
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route path="profile/:name" element={<SingleProfile />} />
+                <Route path="profile" element={<Profile />} />
+                <Route path="posts/:id" element={<SinglePost />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="about" element={<About />} />
+              </Route>
+            </Routes>
+          </ErrorBoundary>
         </Router>
       </AuthProvider>
     </QueryClientProvider>

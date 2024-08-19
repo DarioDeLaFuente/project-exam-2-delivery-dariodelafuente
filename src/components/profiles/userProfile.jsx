@@ -1,12 +1,13 @@
-import React from "react";
+import PropTypes from "prop-types";
 import PlaceholderImage from "../posts/PlaceholderImage";
 import { Card, Row, Col } from "react-bootstrap";
 import styles from "./userProfile.module.css";
 import UpdateProfileMedia from "../../components/profiles/UpdateProfileMedia";
+import LoaderBox from "../loader/LoaderBox";
 
 const UserProfile = ({ user }) => {
   if (!user) {
-    return <p>Loading...</p>;
+    return <LoaderBox />;
   }
 
   return (
@@ -45,6 +46,20 @@ const UserProfile = ({ user }) => {
       </Card>
     </>
   );
+};
+
+UserProfile.propTypes = {
+  user: PropTypes.shape({
+    banner: PropTypes.string,
+    avatar: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    _count: PropTypes.shape({
+      posts: PropTypes.number,
+      followers: PropTypes.number,
+      following: PropTypes.number,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default UserProfile;

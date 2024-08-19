@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
@@ -9,7 +8,8 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { AiOutlineCamera } from "react-icons/ai";
 
 const FooterNav = () => {
-  const { user, isLoggedIn } = useAuth();
+  //const { user, isLoggedIn } = useAuth();
+  const { user } = useAuth();
 
   return (
     <Navbar className={styles.footerbar}>

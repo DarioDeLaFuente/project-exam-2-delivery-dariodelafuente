@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { getToken } from "../../utils/storage";
 import { Button } from "react-bootstrap";
@@ -78,4 +79,9 @@ const FollowButton = ({
   );
 };
 
+FollowButton.propTypes = {
+  profileName: PropTypes.string.isRequired,
+  isFollowing: PropTypes.bool.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+};
 export default FollowButton;

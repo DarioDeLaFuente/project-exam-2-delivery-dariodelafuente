@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { Carousel, Card, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +6,7 @@ import { ALL_PROFILES_URL } from "../../constants/apiUrl";
 import { getToken } from "../../utils/storage";
 import PlaceholderImage from "../posts/PlaceholderImage";
 import styles from "./ProfileCarousel.module.css";
+import LoaderBox from "../../components/loader/LoaderBox/";
 
 const fetchProfiles = async () => {
   const accessToken = getToken();
@@ -33,7 +33,7 @@ const ProfileCarousel = () => {
     enabled: !!getToken(),
   });
 
-  if (isLoading) return <p>Loading profiles...</p>;
+  if (isLoading) return <LoaderBox />;
   if (error) return <p>Error loading profiles: {error.message}</p>;
   if (!Array.isArray(profiles)) return <p>No profiles found.</p>;
 

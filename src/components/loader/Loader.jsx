@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Loader.module.css";
 import { Container, Row, Col } from "react-bootstrap";
 import { AiOutlineCamera } from "react-icons/ai";

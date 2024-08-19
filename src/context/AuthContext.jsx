@@ -1,14 +1,15 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
-  getToken,
+
   saveToken,
   saveUser,
   getUser,
   clearStorage,
 } from "../utils/storage";
-import { useNavigate } from "react-router-dom";
 import { LOGIN_URL } from "../constants/apiUrl";
 import fetchProfile from "../components/profiles/fetchProfile";
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -50,6 +51,10 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export const useAuth = () => useContext(AuthContext);

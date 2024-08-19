@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { POSTS_URL } from "../../constants/apiUrl";
 import { getToken } from "../../utils/storage";
@@ -116,6 +117,10 @@ const CreatePostForm = ({ userName }) => {
       </Card>
     </>
   );
+};
+
+CreatePostForm.propTypes = {
+  userName: PropTypes.string.isRequired,
 };
 
 export default CreatePostForm;
