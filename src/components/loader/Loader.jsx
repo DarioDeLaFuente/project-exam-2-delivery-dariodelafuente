@@ -16,7 +16,7 @@ const Loader = () => {
                 </p>
                 <ul className={styles.content__container__list}>
                   <li className={styles.content__container__list__item}>
-                    Holla users!
+                    Hello users!
                   </li>
                   <li className={styles.content__container__list__item}>
                     yes u users!
