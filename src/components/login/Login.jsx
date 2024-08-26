@@ -36,6 +36,7 @@ const Login = () => {
             placeholder="name@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autocomplete="email"
           />
         </FloatingLabel>
 
