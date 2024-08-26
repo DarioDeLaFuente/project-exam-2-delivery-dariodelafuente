@@ -5,7 +5,6 @@ import { getToken } from "../../utils/storage";
 const fetchProfile = async (name) => {
   try {
     const token = getToken();
-    console.log("Token used in fetchProfile:", token);
     const response = await axios.get(SINGLE_PROFILE_URL(name), {
       headers: {
         Authorization: `Bearer ${token}`,
