@@ -1,3 +1,9 @@
+# Auction website Project exam 2
+
+![image](https://profile.dariodelafuente.no/wp-content/uploads/2024/09/screencapture-spontaneous-dieffenbachia-2335c8-netlify-app-2024-09-30-20_13_00.png)
+
+This is a simple overview of the use/purpose of the project.
+
 # Description
 
 Project Exam 2:
@@ -68,7 +74,8 @@ Available scripts to lint, build, start, or test the project:
 
 - **Build the project:** `npm run build`
 
-
+## Link to the site: 
+This is [XYZ](https://spontaneous-dieffenbachia-2335c8.netlify.app/)
 
 # React + Vite
 
